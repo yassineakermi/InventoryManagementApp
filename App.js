@@ -3,6 +3,8 @@ import Login from "./src/screens/Login";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./src/screens/Home";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Members from "./src/screens/Members";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,17 +17,32 @@ export default function App() {
   });
   if (!fontsLoaded[0]) return null;
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Products">
-        <Stack.Screen name="login" component={Login} />
-        <Stack.Screen
-          name="Products"
-          component={Home}
-          options={{
-            headerShown: false,
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Products">
+          <Stack.Screen
+            name="login"
+            component={Login}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Products"
+            component={Home}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Members"
+            component={Members}
+            options={{
+              headerShown: false,
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }

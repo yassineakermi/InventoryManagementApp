@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+import Feather from "@expo/vector-icons/Feather";
 import React, { useState, useRef } from "react";
 import { textStyles, colorStyles } from "../utils/GlobalStyles";
 
@@ -31,14 +32,11 @@ const Login = () => {
           Wellcome back to your workspace!
         </Text>
         <View style={styles.inputView}>
-          <Image
-            style={{ marginRight: 10 }}
-            source={require("../../assets/icons/Profile.png")}
-          />
+          <Feather style={{ marginRight: 10 }} name="user" size={24} />
           <TextInput
-            style={textStyles.H3}
+            style={[textStyles.H3, { flex: 1 }]}
             placeholder="Your Email Here"
-            placeholderTextColor={colorStyles.Dark100A}
+            placeholderTextColor={colorStyles.Dark100B}
             onEndEditing={(_) => {
               focusInput();
             }}
@@ -50,29 +48,27 @@ const Login = () => {
             { marginTop: 25, justifyContent: "space-between" },
           ]}
         >
-          <View style={{ display: "flex", flexDirection: "row" }}>
-            <Image
-              style={{ marginRight: 10 }}
-              source={require("../../assets/icons/Lock.png")}
-            />
+          <View style={{ display: "flex", flexDirection: "row", flex: 9 }}>
+            <Feather style={{ marginRight: 10 }} name="lock" size={24} />
             <TextInput
               style={textStyles.H3}
               placeholder="Your Password Here"
-              placeholderTextColor={colorStyles.Dark100A}
+              placeholderTextColor={colorStyles.Dark100B}
               secureTextEntry={passwordHidden}
               focusable={passwordFocused}
               ref={passwordElement}
             />
           </View>
           <TouchableOpacity
+            style={{ flex: 1 }}
             onPress={(_) => {
               setPasswordHidden(!passwordHidden);
             }}
           >
             {passwordHidden ? (
-              <Image source={require("../../assets/icons/Show.png")} />
+              <Feather name="eye" size={24} />
             ) : (
-              <Image source={require("../../assets/icons/Hide.png")} />
+              <Feather name="eye-off" size={24} />
             )}
           </TouchableOpacity>
         </View>
