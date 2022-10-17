@@ -4,9 +4,9 @@ import { PortalProvider } from "@gorhom/portal";
 import { colorStyles } from "../utils/GlobalStyles";
 import BottomNavigation from "../components/BottomNavigation";
 import BottomSheet from "../components/BottomSheet";
-import MembersHeader from "../components/Header";
-import { Feather } from "@expo/vector-icons";
-import AddProductBottomSheet from "../components/AddProductBottomSheet";
+import Header from "../components/Header";
+import { Feather, Ionicons } from "@expo/vector-icons";
+import AddMemberBottomSheet from "../components/AddMemberBottomSheet";
 import ProfilesPreviewList from "../components/ProfilesPreviewList";
 
 const Members = ({ navigation, route }) => {
@@ -25,6 +25,15 @@ const Members = ({ navigation, route }) => {
     </TouchableOpacity>,
   ];
 
+  const leftButtons = [
+    <TouchableOpacity onPress={(_) => navigation.goBack()}>
+      <Ionicons name="arrow-back" size={24} color={colorStyles.StrongBlue} />
+    </TouchableOpacity>,
+  ];
+
+  const onPress = (_) => {
+    navigation.navigate("UserDetails");
+  };
   const members = [
     { name: "Yassine Akermi", role: "Web developer" },
     { name: "David Guetta", role: "Role Model" },
@@ -39,11 +48,16 @@ const Members = ({ navigation, route }) => {
   return (
     <PortalProvider>
       <SafeAreaView style={styles.container}>
-        <MembersHeader title="Team Members" rightButtons={rightButtons} />
+        <Header
+          title="Team Members"
+          rightButtons={rightButtons}
+          leftButtons={leftButtons}
+        />
+        <ProfilesPreviewList data={members} navigation={navigation} />
+        <BottomNavigation navigation={navigation} route={route} />
         <BottomSheet modalRef={addModalRef} height={500}>
-          <AddProductBottomSheet closeModal={() => CloseModal(addModalRef)} />
+          <AddMemberBottomSheet closeModal={() => CloseModal(addModalRef)} />
         </BottomSheet>
-        <ProfilesPreviewList data={members} />
       </SafeAreaView>
     </PortalProvider>
   );

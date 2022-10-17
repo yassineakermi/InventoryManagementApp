@@ -1,6 +1,5 @@
 import { SafeAreaView, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useRef } from "react";
-import { PortalProvider } from "@gorhom/portal";
 import Header from "../components/Header";
 import HomeSearchInput from "../components/HomeSearchInput";
 import Categories from "../components/Categories";
@@ -40,76 +39,74 @@ const Home = ({ navigation, route }) => {
   ];
 
   return (
-    <PortalProvider>
-      <SafeAreaView style={styles.container}>
-        <Header title={"Products"} rightButtons={rightButtons} />
-        <HomeSearchInput placeholder="Search" icon="search" />
-        <Categories
-          data={["All", "Jeans", "Hoodies", "T-shirts", "Nike", "Adidas"]}
-        />
-        <ProductsList
-          data={[
-            {
-              name: "This is a title here",
-              image: "https://i.ibb.co/tm8RRYt/Img.png",
-              sizes: { XS: 20, S: 25, M: 0, L: 9, XL: 30, ALL: 102 },
-            },
-            {
-              name: "This is a title here",
-              image: "https://i.ibb.co/tm8RRYt/Img.png",
-              sizes: { XS: 20, S: 25, M: 0, L: 9, XL: 30, ALL: 102 },
-            },
-            {
-              name: "This is a title here",
-              image: "https://i.ibb.co/tm8RRYt/Img.png",
-              sizes: { XS: 20, S: 25, M: 0, L: 9, XL: 30, ALL: 102 },
-            },
-            {
-              name: "This is a title here",
-              image: "https://i.ibb.co/tm8RRYt/Img.png",
-              sizes: { XS: 20, S: 25, M: 0, L: 9, XL: 30, ALL: 102 },
-            },
-            {
-              name: "This is a title here",
-              image: "https://i.ibb.co/tm8RRYt/Img.png",
-              sizes: { XS: 20, S: 25, M: 0, L: 9, XL: 30, ALL: 102 },
-            },
-            {
-              name: "This is a title here",
-              image: "https://i.ibb.co/tm8RRYt/Img.png",
-              sizes: { XS: 20, S: 25, M: 0, L: 9, XL: 30, ALL: 102 },
-            },
-            {
-              name: "This is a title here",
-              image: "https://i.ibb.co/tm8RRYt/Img.png",
-              sizes: { XS: 20, S: 25, M: 0, L: 9, XL: 30, ALL: 102 },
-            },
-            {
-              name: "This is a title here",
-              image: "https://i.ibb.co/tm8RRYt/Img.png",
-              sizes: { XS: 20, S: 25, M: 0, L: 9, XL: 30, ALL: 102 },
-            },
-            {
-              name: "This is a title here",
-              image: "https://i.ibb.co/tm8RRYt/Img.png",
-              sizes: { XS: 20, S: 25, M: 0, L: 9, XL: 30, ALL: 102 },
-            },
-          ]}
-        />
+    <SafeAreaView style={styles.container}>
+      <Header title={"Products"} rightButtons={rightButtons} />
+      <HomeSearchInput placeholder="Search" icon="search" />
+      <Categories
+        data={["All", "Jeans", "Hoodies", "T-shirts", "Nike", "Adidas"]}
+      />
+      <ProductsList
+        data={[
+          {
+            name: "This is a title here",
+            image: "https://i.ibb.co/tm8RRYt/Img.png",
+            sizes: { XS: 20, S: 25, M: 0, L: 9, XL: 30, ALL: 102 },
+          },
+          {
+            name: "This is a title here",
+            image: "https://i.ibb.co/tm8RRYt/Img.png",
+            sizes: { XS: 20, S: 25, M: 0, L: 9, XL: 30, ALL: 102 },
+          },
+          {
+            name: "This is a title here",
+            image: "https://i.ibb.co/tm8RRYt/Img.png",
+            sizes: { XS: 20, S: 25, M: 0, L: 9, XL: 30, ALL: 102 },
+          },
+          {
+            name: "This is a title here",
+            image: "https://i.ibb.co/tm8RRYt/Img.png",
+            sizes: { XS: 20, S: 25, M: 0, L: 9, XL: 30, ALL: 102 },
+          },
+          {
+            name: "This is a title here",
+            image: "https://i.ibb.co/tm8RRYt/Img.png",
+            sizes: { XS: 20, S: 25, M: 0, L: 9, XL: 30, ALL: 102 },
+          },
+          {
+            name: "This is a title here",
+            image: "https://i.ibb.co/tm8RRYt/Img.png",
+            sizes: { XS: 20, S: 25, M: 0, L: 9, XL: 30, ALL: 102 },
+          },
+          {
+            name: "This is a title here",
+            image: "https://i.ibb.co/tm8RRYt/Img.png",
+            sizes: { XS: 20, S: 25, M: 0, L: 9, XL: 30, ALL: 102 },
+          },
+          {
+            name: "This is a title here",
+            image: "https://i.ibb.co/tm8RRYt/Img.png",
+            sizes: { XS: 20, S: 25, M: 0, L: 9, XL: 30, ALL: 102 },
+          },
+          {
+            name: "This is a title here",
+            image: "https://i.ibb.co/tm8RRYt/Img.png",
+            sizes: { XS: 20, S: 25, M: 0, L: 9, XL: 30, ALL: 102 },
+          },
+        ]}
+      />
 
-        <BottomNavigation navigation={navigation} route={route} />
-        <BottomSheet modalRef={addModalRef} height={500}>
-          <AddProductBottomSheet closeModal={() => CloseModal(addModalRef)} />
-        </BottomSheet>
+      <BottomNavigation navigation={navigation} route={route} />
+      <BottomSheet modalRef={addModalRef} height={500}>
+        <AddProductBottomSheet closeModal={() => CloseModal(addModalRef)} />
+      </BottomSheet>
 
-        <BottomSheet modalRef={sortModalRef} height={500}>
-          <SortBottomSheet closeModal={() => CloseModal(sortModalRef)} />
-        </BottomSheet>
-        <BottomSheet modalRef={filterModalRef} height={500}>
-          <FilterBottomSheet closeModal={() => CloseModal(filterModalRef)} />
-        </BottomSheet>
-      </SafeAreaView>
-    </PortalProvider>
+      <BottomSheet modalRef={sortModalRef} height={500}>
+        <SortBottomSheet closeModal={() => CloseModal(sortModalRef)} />
+      </BottomSheet>
+      <BottomSheet modalRef={filterModalRef} height={500}>
+        <FilterBottomSheet closeModal={() => CloseModal(filterModalRef)} />
+      </BottomSheet>
+    </SafeAreaView>
   );
 };
 

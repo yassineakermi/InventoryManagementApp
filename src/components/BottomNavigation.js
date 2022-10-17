@@ -13,17 +13,44 @@ const BottomNavigation = ({ navigation, route }) => {
         <Ionicons
           name="ios-chatbubble-ellipses-outline"
           size={20}
-          color={colorStyles.Dark60}
+          color={
+            route.name == "Issues" ? colorStyles.StrongBlue : colorStyles.Dark60
+          }
         />
-        <Text style={{ ...textStyles.Help_text, color: colorStyles.Dark60 }}>
+        <Text
+          style={{
+            ...textStyles.Help_text,
+            color:
+              route.name == "Issues"
+                ? colorStyles.StrongBlue
+                : colorStyles.Dark60,
+          }}
+        >
           Issues
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={{ justifyContent: "space-between", alignItems: "center" }}
+        onPress={(_) => navigation.navigate("Products")}
       >
-        <Fontisto name="shopping-store" size={20} color={colorStyles.Dark60} />
-        <Text style={{ ...textStyles.Help_text, color: colorStyles.Dark60 }}>
+        <Fontisto
+          name="shopping-store"
+          size={20}
+          color={
+            route.name == "Products"
+              ? colorStyles.StrongBlue
+              : colorStyles.Dark60
+          }
+        />
+        <Text
+          style={{
+            ...textStyles.Help_text,
+            color:
+              route.name == "Products"
+                ? colorStyles.StrongBlue
+                : colorStyles.Dark60,
+          }}
+        >
           Inventory
         </Text>
       </TouchableOpacity>
@@ -32,8 +59,24 @@ const BottomNavigation = ({ navigation, route }) => {
         style={{ justifyContent: "space-between", alignItems: "center" }}
         onPress={(_) => navigation.navigate("Members")}
       >
-        <Feather name="users" size={20} color={colorStyles.Dark60} />
-        <Text style={{ ...textStyles.Help_text, color: colorStyles.Dark60 }}>
+        <Feather
+          name="users"
+          size={20}
+          color={
+            route.name == "Members"
+              ? colorStyles.StrongBlue
+              : colorStyles.Dark60
+          }
+        />
+        <Text
+          style={{
+            ...textStyles.Help_text,
+            color:
+              route.name == "Members"
+                ? colorStyles.StrongBlue
+                : colorStyles.Dark60,
+          }}
+        >
           Team
         </Text>
       </TouchableOpacity>

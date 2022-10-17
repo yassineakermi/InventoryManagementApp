@@ -5,12 +5,7 @@ import ProductItem from "./ProductItem";
 const ProductsList = ({ data = [] }) => {
   const itemRenderer = ({ item, index }) => {
     return (
-      <ProductItem
-        name={item.name}
-        image={item.image}
-        sizes={item.sizes}
-        key={index}
-      />
+      <ProductItem name={item.name} image={item.image} sizes={item.sizes} />
     );
   };
   return (
@@ -18,6 +13,7 @@ const ProductsList = ({ data = [] }) => {
       data={data}
       renderItem={itemRenderer}
       showsVerticalScrollIndicator={false}
+      keyExtractor={(item, index) => index}
       style={{
         margintop: 10,
         flexGrow: 0,

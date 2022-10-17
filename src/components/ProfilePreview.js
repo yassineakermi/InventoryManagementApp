@@ -5,10 +5,14 @@ import { colorStyles, textStyles } from "../utils/GlobalStyles";
 const ProfilePreview = ({
   profileinfo = { name: "Yassine Akermi", role: "Web Developer" },
   isOnline = false,
+  navigation = null,
 }) => {
+  const onPress = (_) => {
+    navigation.navigate("UserDetails", { profileinfo, isOnline });
+  };
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={{ borderRadius: 50 }}>
+      <TouchableOpacity style={{ borderRadius: 50 }} onPress={onPress}>
         <Image
           source={{
             uri: "https://i.ibb.co/QfJ4Fcz/9f74535608abc523efe3eb37a9a30a54.jpg",
@@ -27,6 +31,7 @@ const ProfilePreview = ({
           marginLeft: 10,
           justifyContent: "center",
         }}
+        onPress={onPress}
       >
         <Text
           style={{

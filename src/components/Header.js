@@ -1,19 +1,51 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { colorStyles, textStyles } from "../utils/GlobalStyles";
-const Header = ({ title, rightButtons = [] }) => {
+const Header = ({
+  title,
+  rightButtons = [],
+  leftButtons = [],
+  titleCentered = false,
+}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
+      {leftButtons.length ? (
+        <View
+          style={{
+            ...styles.header,
+            justifyContent:
+              rightButtons.length > 2
+                ? "space-between"
+                : rightButtons.length > 1
+                ? "space-evenly"
+                : "flex-end",
+            flex: leftButtons.length > 2 ? 3 : leftButtons.length > 1 ? 2 : 1,
+            marginBottom: 3,
+          }}
+        >
+          {leftButtons}
+        </View>
+      ) : (
+        []
+      )}
+      <Text
+        style={{
+          ...styles.title,
+          textAlign: titleCentered ? "center" : "auto",
+        }}
+      >
+        {title}
+      </Text>
       <View
         style={{
-          ...styles.headerRight,
+          ...styles.headerButtons,
           justifyContent:
             rightButtons.length > 2
               ? "space-between"
               : rightButtons.length > 1
               ? "space-evenly"
-              : "center",
+              : "flex-end",
+          flex: rightButtons.length > 2 ? 3 : rightButtons.length > 1 ? 2 : 1,
         }}
       >
         {rightButtons}
@@ -39,8 +71,9 @@ const styles = StyleSheet.create({
     ...textStyles.H1,
     flex: 7,
     alignSelf: "flex-start",
+    marginLeft: 10,
   },
-  headerRight: {
+  headerButtons: {
     display: "flex",
     flexDirection: "row",
     flex: 3,

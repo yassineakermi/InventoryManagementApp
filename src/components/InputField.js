@@ -7,9 +7,14 @@ const InputField = ({
   textState = "",
   onTextChange = (str) => {},
   next = null,
+  ref_ = null,
   style = {},
   keyboardType = "default",
 }) => {
+  const focusInput = (ref) => {
+    ref.current.focus();
+  };
+
   return (
     <View style={{ ...styles.inputView, ...style }}>
       <TextInput
@@ -19,9 +24,10 @@ const InputField = ({
         onChangeText={onTextChange}
         value={textState}
         keyboardType={keyboardType}
-        // onEndEditing={(_) => {
-        //   focusInput();
-        // }}
+        ref={ref_}
+        onEndEditing={(_) => {
+          if (next) focusInput(next);
+        }}
       />
     </View>
   );
