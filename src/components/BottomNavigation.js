@@ -4,11 +4,18 @@ import { Feather } from "@expo/vector-icons";
 import { colorStyles, textStyles } from "../utils/GlobalStyles";
 import { Fontisto } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-const BottomNavigation = ({ navigation, route }) => {
+const BottomNavigation = ({ navigation, route, style = {}, ref_ }) => {
   return (
-    <View style={styles.container}>
+    <View
+      style={{ ...styles.container, ...style }}
+      onLayout={(e) => {
+        const { x, y, width, height } = e.nativeEvent.layout;
+        console.log("bottom", x, y, width, height);
+      }}
+    >
       <TouchableOpacity
         style={{ justifyContent: "space-between", alignItems: "center" }}
+        onPress={(_) => navigation.navigate("Issues")}
       >
         <Ionicons
           name="ios-chatbubble-ellipses-outline"
@@ -63,7 +70,7 @@ const BottomNavigation = ({ navigation, route }) => {
           name="users"
           size={20}
           color={
-            route.name == "Members"
+            route.name == "Members" || route.name == "UserDetails"
               ? colorStyles.StrongBlue
               : colorStyles.Dark60
           }
@@ -72,7 +79,7 @@ const BottomNavigation = ({ navigation, route }) => {
           style={{
             ...textStyles.Help_text,
             color:
-              route.name == "Members"
+              route.name == "Members" || route.name == "UserDetails"
                 ? colorStyles.StrongBlue
                 : colorStyles.Dark60,
           }}

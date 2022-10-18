@@ -8,7 +8,13 @@ const Header = ({
   titleCentered = false,
 }) => {
   return (
-    <View style={styles.container}>
+    <View
+      style={styles.container}
+      onLayout={(e) => {
+        const { x, y, width, height } = e.nativeEvent.layout;
+        console.log("header", x, y, width, height);
+      }}
+    >
       {leftButtons.length ? (
         <View
           style={{

@@ -1,5 +1,11 @@
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from "react-native";
-import React, { useRef } from "react";
+import {
+  SafeAreaView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Dimensions,
+} from "react-native";
+import React, { useRef, useLayoutEffect, useState } from "react";
 import { PortalProvider } from "@gorhom/portal";
 import { colorStyles } from "../utils/GlobalStyles";
 import BottomNavigation from "../components/BottomNavigation";
@@ -54,7 +60,11 @@ const Members = ({ navigation, route }) => {
           leftButtons={leftButtons}
         />
         <ProfilesPreviewList data={members} navigation={navigation} />
-        <BottomNavigation navigation={navigation} route={route} />
+        <BottomNavigation
+          navigation={navigation}
+          route={route}
+          style={{ zIndex: 10 }}
+        />
         <BottomSheet modalRef={addModalRef} height={500}>
           <AddMemberBottomSheet closeModal={() => CloseModal(addModalRef)} />
         </BottomSheet>
@@ -67,6 +77,8 @@ const styles = StyleSheet.create({
   container: {
     height: "100%",
     backgroundColor: colorStyles.White,
+    position: "relative",
+    display: "flex",
   },
 });
 

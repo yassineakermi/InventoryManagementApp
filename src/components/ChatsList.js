@@ -1,7 +1,8 @@
 import { View, Text, FlatList } from "react-native";
 import React from "react";
-import ProfilePreview from "./ProfilePreview";
-const ProfilesPreviewList = ({
+import ChatPreview from "./ChatPreview";
+
+const ChatsList = ({
   data,
   navigation = null,
   onPress = (_) => {},
@@ -9,8 +10,10 @@ const ProfilesPreviewList = ({
 }) => {
   const itemRenderer = ({ item, index }) => {
     return (
-      <ProfilePreview
-        profileinfo={item}
+      <ChatPreview
+        lastMessage={item.lastMessage}
+        date={item.date}
+        profileinfo={item.profileinfo}
         isOnline={index % 2 == 0}
         navigation={navigation}
       />
@@ -31,4 +34,4 @@ const ProfilesPreviewList = ({
   );
 };
 
-export default ProfilesPreviewList;
+export default ChatsList;

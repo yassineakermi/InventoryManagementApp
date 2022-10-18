@@ -8,6 +8,8 @@ import { PortalProvider } from "@gorhom/portal";
 
 import Members from "./src/screens/Members";
 import Profile from "./src/screens/Profile";
+import Issues from "./src/screens/Issues";
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -19,41 +21,46 @@ export default function App() {
   });
   if (!fontsLoaded[0]) return null;
   return (
-    <PortalProvider>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="Products">
-            <Stack.Screen
-              name="login"
-              component={Login}
-              options={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="Products"
-              component={Home}
-              options={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="Members"
-              component={Members}
-              options={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="UserDetails"
-              component={Profile}
-              options={{
-                headerShown: false,
-              }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </GestureHandlerRootView>
-    </PortalProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Products">
+          <Stack.Screen
+            name="login"
+            component={Login}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Products"
+            component={Home}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Members"
+            component={Members}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="UserDetails"
+            component={Profile}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Issues"
+            component={Issues}
+            options={{
+              headerShown: false,
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }
