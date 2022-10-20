@@ -7,6 +7,7 @@ const ChatsList = ({
   navigation = null,
   onPress = (_) => {},
   style = {},
+  route,
 }) => {
   const itemRenderer = ({ item, index }) => {
     return (
@@ -16,6 +17,8 @@ const ChatsList = ({
         profileinfo={item.profileinfo}
         isOnline={index % 2 == 0}
         navigation={navigation}
+        route={route}
+        onPress={onPress}
       />
     );
   };

@@ -8,7 +8,13 @@ const HomeSearchInput = ({
   icon = "user",
 }) => {
   return (
-    <View style={styles.inputView}>
+    <View
+      style={styles.inputView}
+      onLayout={(e) => {
+        const { x, y, width, height } = e.nativeEvent.layout;
+        console.log("SearchInput", x, y, width, height);
+      }}
+    >
       <Feather
         style={{ marginRight: 10 }}
         name={icon}

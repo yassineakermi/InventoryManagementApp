@@ -9,6 +9,7 @@ import { PortalProvider } from "@gorhom/portal";
 import Members from "./src/screens/Members";
 import Profile from "./src/screens/Profile";
 import Issues from "./src/screens/Issues";
+import Discussions from "./src/screens/Discussions";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,7 +24,7 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Products">
+        <Stack.Navigator initialRouteName="Issues">
           <Stack.Screen
             name="login"
             component={Login}
@@ -55,6 +56,13 @@ export default function App() {
           <Stack.Screen
             name="Issues"
             component={Issues}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Discussion"
+            component={Discussions}
             options={{
               headerShown: false,
             }}

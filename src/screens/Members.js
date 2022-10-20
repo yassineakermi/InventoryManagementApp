@@ -25,6 +25,8 @@ const Members = ({ navigation, route }) => {
     ref.current?.close();
   };
 
+  const windowHeight = Dimensions.get("window").height;
+
   const rightButtons = [
     <TouchableOpacity onPress={(_) => OpenModal(addModalRef)}>
       <Feather name="plus-square" size={24} color={colorStyles.StrongBlue} />
@@ -37,9 +39,6 @@ const Members = ({ navigation, route }) => {
     </TouchableOpacity>,
   ];
 
-  const onPress = (_) => {
-    navigation.navigate("UserDetails");
-  };
   const members = [
     { name: "Yassine Akermi", role: "Web developer" },
     { name: "David Guetta", role: "Role Model" },
@@ -59,12 +58,12 @@ const Members = ({ navigation, route }) => {
           rightButtons={rightButtons}
           leftButtons={leftButtons}
         />
-        <ProfilesPreviewList data={members} navigation={navigation} />
-        <BottomNavigation
+        <ProfilesPreviewList
+          data={members}
           navigation={navigation}
-          route={route}
-          style={{ zIndex: 10 }}
+          style={{ height: windowHeight - 157 }}
         />
+        <BottomNavigation navigation={navigation} route={route} />
         <BottomSheet modalRef={addModalRef} height={500}>
           <AddMemberBottomSheet closeModal={() => CloseModal(addModalRef)} />
         </BottomSheet>

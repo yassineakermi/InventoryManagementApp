@@ -24,77 +24,77 @@ const Issues = ({ navigation, route }) => {
       isOnline: false,
       date: "20:48",
       lastMessage:
-        "I wanted to know, how much to be paid this month as usual please?\n Thanks.",
+        "The product #10096325 is no longer available, we should re-stock.",
     },
     {
       profileinfo: { name: "Yassine Akermi", role: "Web Developer" },
       isOnline: false,
       date: "20:48",
       lastMessage:
-        "I wanted to know, how much to be paid this month as usual please?\n Thanks.",
+        "The product #10096325 is no longer available, we should re-stock.",
     },
     {
       profileinfo: { name: "Yassine Akermi", role: "Web Developer" },
       isOnline: false,
       date: "20:48",
       lastMessage:
-        "I wanted to know, how much to be paid this month as usual please?\n Thanks.",
+        "The product #10096325 is no longer available, we should re-stock.",
     },
     {
       profileinfo: { name: "Yassine Akermi", role: "Web Developer" },
       isOnline: false,
       date: "20:48",
       lastMessage:
-        "I wanted to know, how much to be paid this month as usual please?\n Thanks.",
+        "The product #10096325 is no longer available, we should re-stock.",
     },
     {
       profileinfo: { name: "Yassine Akermi", role: "Web Developer" },
       isOnline: false,
       date: "20:48",
       lastMessage:
-        "I wanted to know, how much to be paid this month as usual please?\n Thanks.",
+        "The product #10096325 is no longer available, we should re-stock.",
     },
     {
       profileinfo: { name: "Yassine Akermi", role: "Web Developer" },
       isOnline: false,
       date: "20:48",
       lastMessage:
-        "I wanted to know, how much to be paid this month as usual please?\n Thanks.",
+        "The product #10096325 is no longer available, we should re-stock.",
     },
     {
       profileinfo: { name: "Yassine Akermi", role: "Web Developer" },
       isOnline: false,
       date: "20:48",
       lastMessage:
-        "I wanted to know, how much to be paid this month as usual please?\n Thanks.",
+        "The product #10096325 is no longer available, we should re-stock.",
     },
     {
       profileinfo: { name: "Yassine Akermi", role: "Web Developer" },
       isOnline: false,
       date: "20:48",
       lastMessage:
-        "I wanted to know, how much to be paid this month as usual please?\n Thanks.",
+        "The product #10096325 is no longer available, we should re-stock.",
     },
     {
       profileinfo: { name: "Yassine Akermi", role: "Web Developer" },
       isOnline: false,
       date: "20:48",
       lastMessage:
-        "I wanted to know, how much to be paid this month as usual please?\n Thanks.",
+        "The product #10096325 is no longer available, we should re-stock.",
     },
     {
       profileinfo: { name: "Yassine Akermi", role: "Web Developer" },
       isOnline: false,
       date: "20:48",
       lastMessage:
-        "I wanted to know, how much to be paid this month as usual please?\n Thanks.",
+        "The product #10096325 is no longer available, we should re-stock.",
     },
     {
       profileinfo: { name: "Yassine Akermi", role: "Web Developer" },
       isOnline: false,
       date: "20:48",
       lastMessage:
-        "I wanted to know, how much to be paid this month as usual please?\n Thanks.",
+        "The product #10096325 is no longer available, we should re-stock.",
     },
   ];
   return (
@@ -104,6 +104,7 @@ const Issues = ({ navigation, route }) => {
       <ChatsList
         data={chatlist}
         navigation={navigation}
+        route={route}
         style={{ height: windowHeight - 157 }}
       />
 

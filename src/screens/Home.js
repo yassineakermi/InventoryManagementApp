@@ -1,4 +1,9 @@
-import { SafeAreaView, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  SafeAreaView,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
 import React, { useRef } from "react";
 import Header from "../components/Header";
 import HomeSearchInput from "../components/HomeSearchInput";
@@ -23,6 +28,8 @@ const Home = ({ navigation, route }) => {
   const CloseModal = (ref) => {
     ref.current?.close();
   };
+
+  const windowHeight = Dimensions.get("window").height;
 
   const rightButtons = [
     <TouchableOpacity onPress={(_) => OpenModal(addModalRef)}>
@@ -96,6 +103,7 @@ const Home = ({ navigation, route }) => {
               sizes: { XS: 20, S: 25, M: 0, L: 9, XL: 30, ALL: 102 },
             },
           ]}
+          style={{ height: windowHeight - 300 }}
         />
 
         <BottomNavigation navigation={navigation} route={route} />

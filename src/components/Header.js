@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { colorStyles, textStyles } from "../utils/GlobalStyles";
 const Header = ({
   title,
@@ -7,6 +7,12 @@ const Header = ({
   leftButtons = [],
   titleCentered = false,
 }) => {
+  useEffect(() => {
+    rightButtons = rightButtons.map((element) =>
+      React.cloneElement(element, { key: "your-unique-key-here" })
+    );
+  }, []);
+
   return (
     <View
       style={styles.container}
@@ -29,7 +35,9 @@ const Header = ({
             marginBottom: 3,
           }}
         >
-          {leftButtons}
+          {leftButtons.map((element, index) =>
+            React.cloneElement(element, { key: index })
+          )}
         </View>
       ) : (
         []
@@ -38,6 +46,7 @@ const Header = ({
         style={{
           ...styles.title,
           textAlign: titleCentered ? "center" : "auto",
+          alignSelf: "center",
         }}
       >
         {title}
@@ -52,9 +61,12 @@ const Header = ({
               ? "space-evenly"
               : "flex-end",
           flex: rightButtons.length > 2 ? 3 : rightButtons.length > 1 ? 2 : 1,
+          alignSelf: "center",
         }}
       >
-        {rightButtons}
+        {rightButtons.map((element, index) =>
+          React.cloneElement(element, { key: index })
+        )}
       </View>
     </View>
   );
@@ -71,6 +83,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderBottomWidth: 1,
     borderColor: colorStyles.SecondaryActive,
+    alignItems: "center",
   },
   title: {
     color: colorStyles.Dark100A,
@@ -84,7 +97,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flex: 3,
     justifyContent: "space-between",
-    marginTop: 5,
   },
 });
 

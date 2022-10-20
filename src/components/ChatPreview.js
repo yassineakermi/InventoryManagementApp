@@ -10,7 +10,7 @@ const ChatPreview = ({
   navigation = null,
 }) => {
   const onPress = (_) => {
-    navigation.navigate("Chat", { profileinfo, isOnline });
+    navigation.navigate("Discussion", { profileinfo, isOnline });
   };
   return (
     <View style={styles.container}>
