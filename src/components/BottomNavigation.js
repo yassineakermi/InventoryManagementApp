@@ -10,7 +10,7 @@ const BottomNavigation = ({ navigation, route, style = {}, ref_ }) => {
       style={{ ...styles.container, ...style }}
       onLayout={(e) => {
         const { x, y, width, height } = e.nativeEvent.layout;
-        console.log("bottom", x, y, width, height);
+        console.log(height);
       }}
     >
       <TouchableOpacity

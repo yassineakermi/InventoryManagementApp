@@ -4,7 +4,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
-import React, { useRef } from "react";
+import React, { useRef, useContext, useState } from "react";
 import Header from "../components/Header";
 import HomeSearchInput from "../components/HomeSearchInput";
 import Categories from "../components/Categories";
@@ -18,10 +18,12 @@ import FilterBottomSheet from "../components/FilterBottomSheet";
 
 import { Feather, FontAwesome5 } from "@expo/vector-icons";
 import { PortalProvider } from "@gorhom/portal";
+import AppContext from "../context/AppContext";
 const Home = ({ navigation, route }) => {
   const addModalRef = useRef(null);
   const sortModalRef = useRef(null);
   const filterModalRef = useRef(null);
+
   const OpenModal = (ref) => {
     ref.current?.open();
   };
@@ -29,6 +31,7 @@ const Home = ({ navigation, route }) => {
     ref.current?.close();
   };
 
+  const context = useContext(AppContext);
   const windowHeight = Dimensions.get("window").height;
 
   const rightButtons = [
@@ -47,14 +50,31 @@ const Home = ({ navigation, route }) => {
     </TouchableOpacity>,
   ];
 
-  return (
-    <PortalProvider>
-      <SafeAreaView style={styles.container}>
-        <Header title={"Products"} rightButtons={rightButtons} />
+  const leftButtons = [
+    <TouchableOpacity onPress={() => context?.drawer?.current?.openDrawer()}>
+      <Feather name="menu" size={24} color={colorStyles.StrongBlue} />
+    </TouchableOpacity>,
+  ];
+
+  const getHeader = () => {
+    return (
+      <>
+        <Header
+          title={"Products"}
+          rightButtons={rightButtons}
+          leftButtons={leftButtons}
+        />
         <HomeSearchInput placeholder="Search" icon="search" />
         <Categories
           data={["All", "Jeans", "Hoodies", "T-shirts", "Nike", "Adidas"]}
         />
+      </>
+    );
+  };
+
+  return (
+    <PortalProvider>
+      <SafeAreaView style={styles.container}>
         <ProductsList
           data={[
             {
@@ -103,10 +123,15 @@ const Home = ({ navigation, route }) => {
               sizes: { XS: 20, S: 25, M: 0, L: 9, XL: 30, ALL: 102 },
             },
           ]}
-          style={{ height: windowHeight - 300 }}
+          style={{ height: windowHeight - 65 }}
+          getHeader={getHeader}
         />
 
-        <BottomNavigation navigation={navigation} route={route} />
+        <BottomNavigation
+          navigation={navigation}
+          route={route}
+          style={{ position: "absolute", bottom: 0, width: "100%" }}
+        />
         <BottomSheet modalRef={addModalRef} height={500}>
           <AddProductBottomSheet closeModal={() => CloseModal(addModalRef)} />
         </BottomSheet>

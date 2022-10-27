@@ -3,21 +3,50 @@ import {
   Text,
   StyleSheet,
   TextInput,
-  Image,
+  ActivityIndicator,
   TouchableOpacity,
 } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 import React, { useState, useRef } from "react";
 import { textStyles, colorStyles } from "../utils/GlobalStyles";
+import { auth } from "../../firebaseConfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
   const [passwordHidden, setPasswordHidden] = useState(true);
   const [passwordFocused, setPasswordFocused] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLogginIn, setIsLogginIn] = useState(false);
+  const [passwordErrMessage, setPasswordErrMessage] = useState("");
+  const [emailErrMessage, setEmailErrMessage] = useState("");
+  const [otherErrMessage, setOtherErrMessage] = useState("");
   let passwordElement = useRef();
   const focusInput = () => {
     passwordElement.current.focus();
   };
 
+  const handleError = (err) => {
+    err == "auth/wrong-password"
+      ? setPasswordErrMessage("Password is incorrect!")
+      : err == "auth/user-not-found"
+      ? setEmailErrMessage("Email belongs to no member!")
+      : setOtherErrMessage("Couldn't login! Please contact the developer!");
+  };
+  const onLogin = async () => {
+    setEmailErrMessage("");
+    setOtherErrMessage("");
+    setPasswordErrMessage("");
+    setIsLogginIn(true);
+    try {
+      if (email !== "" && password !== "") {
+        await signInWithEmailAndPassword(auth, email, password);
+      }
+    } catch (error) {
+      handleError(error.code);
+    }
+    setIsLogginIn(false);
+  };
   return (
     <View
       style={{
@@ -31,7 +60,15 @@ const Login = () => {
         <Text style={[styles.smallHeader]}>
           Wellcome back to your workspace!
         </Text>
-        <View style={styles.inputView}>
+
+        <View
+          style={{
+            ...styles.inputView,
+            borderColor: emailErrMessage
+              ? colorStyles.Red
+              : colorStyles.SecondaryActive,
+          }}
+        >
           <Feather style={{ marginRight: 10 }} name="user" size={24} />
           <TextInput
             style={[textStyles.H3, { flex: 1 }]}
@@ -40,13 +77,24 @@ const Login = () => {
             onEndEditing={(_) => {
               focusInput();
             }}
+            onChangeText={(newEmail) => setEmail(newEmail)}
           />
         </View>
+        {emailErrMessage != "" ? (
+          <Text style={styles.errorMessage}>{emailErrMessage}</Text>
+        ) : (
+          []
+        )}
+
         <View
-          style={[
-            styles.inputView,
-            { marginTop: 25, justifyContent: "space-between" },
-          ]}
+          style={{
+            ...styles.inputView,
+            marginTop: 25,
+            justifyContent: "space-between",
+            borderColor: passwordErrMessage
+              ? colorStyles.Red
+              : colorStyles.SecondaryActive,
+          }}
         >
           <View style={{ display: "flex", flexDirection: "row", flex: 9 }}>
             <Feather style={{ marginRight: 10 }} name="lock" size={24} />
@@ -57,6 +105,7 @@ const Login = () => {
               secureTextEntry={passwordHidden}
               focusable={passwordFocused}
               ref={passwordElement}
+              onChangeText={(newPass) => setPassword(newPass)}
             />
           </View>
           <TouchableOpacity
@@ -72,16 +121,30 @@ const Login = () => {
             )}
           </TouchableOpacity>
         </View>
+        {passwordErrMessage != "" ? (
+          <Text style={styles.errorMessage}>{passwordErrMessage}</Text>
+        ) : (
+          []
+        )}
       </View>
-      <TouchableOpacity style={styles.signin_btn}>
-        <Text
-          style={[
-            textStyles.H3,
-            { color: colorStyles.White, alignSelf: "center" },
-          ]}
-        >
-          Sign In
-        </Text>
+
+      <TouchableOpacity
+        style={styles.signin_btn}
+        onPress={onLogin}
+        disabled={isLogginIn}
+      >
+        {isLogginIn ? (
+          <ActivityIndicator color={colorStyles.White} />
+        ) : (
+          <Text
+            style={[
+              textStyles.H3,
+              { color: colorStyles.White, alignSelf: "center" },
+            ]}
+          >
+            Sign In
+          </Text>
+        )}
       </TouchableOpacity>
     </View>
   );
@@ -112,7 +175,6 @@ const styles = StyleSheet.create({
 
   inputView: {
     marginTop: 45,
-    borderColor: colorStyles.SecondaryActive,
     borderRadius: 12,
     paddingVertical: 16,
     paddingLeft: 20,
@@ -120,6 +182,12 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     display: "flex",
     flexDirection: "row",
+  },
+
+  errorMessage: {
+    marginHorizontal: 10,
+    color: colorStyles.Red,
+    marginTop: 5,
   },
 });
 export default Login;

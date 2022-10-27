@@ -34,7 +34,7 @@ const Categories = ({ data = [], style = {} }) => {
     <FlatList
       data={data}
       renderItem={itemRenderer}
-      keyExtractor={(item) => item}
+      keyExtractor={(item, index) => index}
       showsHorizontalScrollIndicator={false}
       horizontal={true}
       style={{ ...styles.container, ...style }}

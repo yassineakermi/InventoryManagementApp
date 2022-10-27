@@ -1,19 +1,20 @@
+import React, { useRef, useState } from "react";
 import { useFonts } from "expo-font";
-import Login from "./src/screens/Login";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "./src/screens/Home";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { PortalProvider } from "@gorhom/portal";
 
-import Members from "./src/screens/Members";
-import Profile from "./src/screens/Profile";
-import Issues from "./src/screens/Issues";
-import Discussions from "./src/screens/Discussions";
-
-const Stack = createNativeStackNavigator();
-
+import { useAuthentication } from "./src/utils/hooks/useAuthentication";
+import UserStack from "./src/navigation/userStack";
+import AuthStack from "./src/navigation/authStack";
+import AppContext from "./src/context/AppContext";
+import Drawer from "./src/components/Drawer";
 export default function App() {
+  const { user } = useAuthentication();
+  const drawer = useRef(null);
+  const golalState = {
+    user,
+    drawer,
+  };
+
   let fontsLoaded = useFonts({
     "poppins-semibold": require("./assets/fonts/Poppins-SemiBold.ttf"),
     "poppins-regular": require("./assets/fonts/Poppins-Regular.ttf"),
@@ -22,53 +23,10 @@ export default function App() {
   });
   if (!fontsLoaded[0]) return null;
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Issues">
-          <Stack.Screen
-            name="login"
-            component={Login}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="Products"
-            component={Home}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="Members"
-            component={Members}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="UserDetails"
-            component={Profile}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="Issues"
-            component={Issues}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="Discussion"
-            component={Discussions}
-            options={{
-              headerShown: false,
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </GestureHandlerRootView>
+    <AppContext.Provider value={golalState}>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        {user ? <UserStack /> : <AuthStack />}
+      </GestureHandlerRootView>
+    </AppContext.Provider>
   );
 }

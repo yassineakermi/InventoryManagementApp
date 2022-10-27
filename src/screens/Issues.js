@@ -4,13 +4,22 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
-import React, { useRef } from "react";
+import React, { useContext } from "react";
 import Header from "../components/Header";
 import { colorStyles } from "../utils/GlobalStyles";
 import BottomNavigation from "../components/BottomNavigation";
 import { Feather } from "@expo/vector-icons";
 import ChatsList from "../components/ChatsList";
+import AppContext from "../context/AppContext";
+
 const Issues = ({ navigation, route }) => {
+  const context = useContext(AppContext);
+  const leftButtons = [
+    <TouchableOpacity onPress={() => context?.drawer?.current?.openDrawer()}>
+      <Feather name="menu" size={24} color={colorStyles.StrongBlue} />
+    </TouchableOpacity>,
+  ];
+
   const rightButtons = [
     <TouchableOpacity onPress={(_) => {}}>
       <Feather name="search" size={24} color={colorStyles.StrongBlue} />
@@ -99,13 +108,17 @@ const Issues = ({ navigation, route }) => {
   ];
   return (
     <SafeAreaView style={styles.container}>
-      <Header title={"Chat"} rightButtons={rightButtons} />
+      <Header
+        title={"Chat"}
+        rightButtons={rightButtons}
+        leftButtons={leftButtons}
+      />
 
       <ChatsList
         data={chatlist}
         navigation={navigation}
         route={route}
-        style={{ height: windowHeight - 157 }}
+        style={{ height: windowHeight - 140 }}
       />
 
       <BottomNavigation

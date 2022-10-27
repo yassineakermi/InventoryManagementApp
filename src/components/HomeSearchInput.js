@@ -12,7 +12,6 @@ const HomeSearchInput = ({
       style={styles.inputView}
       onLayout={(e) => {
         const { x, y, width, height } = e.nativeEvent.layout;
-        console.log("SearchInput", x, y, width, height);
       }}
     >
       <Feather

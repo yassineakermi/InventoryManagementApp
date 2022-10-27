@@ -18,7 +18,6 @@ const Header = ({
       style={styles.container}
       onLayout={(e) => {
         const { x, y, width, height } = e.nativeEvent.layout;
-        console.log("header", x, y, width, height);
       }}
     >
       {leftButtons.length ? (
@@ -75,7 +74,7 @@ const Header = ({
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 24,
-    paddingTop: 50,
+    paddingTop: 20,
     paddingBottom: 10,
     backgroundColor: colorStyles.White,
     display: "flex",
